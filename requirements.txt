@@ -1,0 +1,5 @@
+numpy==1.26.4
+opencv-python==4.10.0.84
+pydantic==2.8.2
+PyYAML==6.0.2
+shapely==2.0.5

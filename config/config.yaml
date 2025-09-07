@@ -1,0 +1,47 @@
+intersection:
+  id: "ktm_demo_01"
+  name: "Kathmandu Demo Intersection"
+  fps: 15
+  approaches:
+    - id: "N"
+      camera_url: "videos/north.mp4"   # replace with rtsp://... when ready
+    - id: "E"
+      camera_url: "videos/east.mp4"
+    - id: "S"
+      camera_url: "videos/south.mp4"
+    - id: "W"
+      camera_url: "videos/west.mp4"
+
+lanes:
+  geojson_path: "data/lanes/example_intersection.geojson"
+  stopline_gap_m: 3.0
+
+perception:
+  detector:
+    name: "stub"        # change to yolov8 later
+    conf_thresh: 0.3
+    classes: ["car","bus","truck","motorcycle","bicycle","pedestrian"]
+  tracker:
+    name: "iou"         # simple IOU tracker placeholder
+    max_age: 10
+    iou_thresh: 0.3
+
+control:
+  strategy: "max_pressure"  # options: webster, max_pressure
+  control_interval_s: 1.0
+  min_green_s: 7
+  max_green_s: 60
+  yellow_s: 3
+  all_red_s: 1
+  lost_time_s: 4
+  fairness_max_skip: 3
+
+priority:
+  enabled: true
+  eta_threshold_s: 30
+  topics:
+    subscribe: "emergency/ktm_demo_01"
+
+telemetry:
+  enabled: true
+  log_path: "logs/run.log"

@@ -1,0 +1,89 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "lane",
+        "approach_id": "N",
+        "lane_id": "N1",
+        "movement": "through"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [100, 100],
+            [200, 100],
+            [200, 300],
+            [100, 300],
+            [100, 100]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "lane",
+        "approach_id": "E",
+        "lane_id": "E1",
+        "movement": "through"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [300, 100],
+            [400, 100],
+            [400, 300],
+            [300, 300],
+            [300, 100]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "lane",
+        "approach_id": "S",
+        "lane_id": "S1",
+        "movement": "through"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [100, 400],
+            [200, 400],
+            [200, 600],
+            [100, 600],
+            [100, 400]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "lane",
+        "approach_id": "W",
+        "lane_id": "W1",
+        "movement": "through"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [0, 100],
+            [80, 100],
+            [80, 300],
+            [0, 300],
+            [0, 100]
+          ]
+        ]
+      }
+    }
+  ]
+}
