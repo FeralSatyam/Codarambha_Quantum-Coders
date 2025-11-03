@@ -18,7 +18,10 @@ class TrackerUI(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("🚦 Multi-Class Tracking Dashboard")
-        self.state("zoomed")
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        self.geometry(f"{screen_width}x{screen_height}+0+0")
+
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("dark-blue")
 

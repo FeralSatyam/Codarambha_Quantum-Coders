@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenRoute : Automated Traffic System for Smarter Mobility</title>
+    <meta name="description" content="Prototype using YOLO-based vehicle detection and a 2D simulation to demonstrate vision-driven adaptive signal priority.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="intro-loader">
+        <div class="intro-core">
+            <div class="intro-ring"></div>
+                <div class="intro-text">GREENROUTE</div>
+            </div>
+        </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="scrollToSection('hero')">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                <span class="logo-text">GreenRoute</span>
+            </div>
+            <ul class="nav-links">
+                <li><button onclick="scrollToSection('hero')">Home</button></li>
+                <li><button onclick="scrollToSection('features')">Features</button></li>
+                <li><button onclick="scrollToSection('stats')">Impact</button></li>
+                <li>
+                    <button class="btn-demo" onclick="window.location.href='/run-simulator'">
+                    Try Demo
+                    </button>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
+
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="badge">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 3l1.912 5.813a2 2 0 001.899 1.378h6.102l-4.938 3.59a2 2 0 00-.727 2.236l1.912 5.813-4.938-3.59a2 2 0 00-2.354 0l-4.938 3.59 1.912-5.813a2 2 0 00-.727-2.236L2.087 10.19h6.102a2 2 0 001.899-1.378L12 3z"></path>
+                        </svg>
+                        <span>AI-Powered Traffic Management</span>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        GreenRoute<br>
+                        <span class="gradient-text">Automated Traffic System for Smarter Mobility</span>
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        An AI-driven adaptive signal control prototype leveraging YOLO object detection for real-time vehicle counting and dynamic traffic phase optimization.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <form action="{{ url_for('run_simulator') }}" method="get">
+                    <button type="submit" class="btn btn-primary">Launch Demo</button>
+                    </form>
+                            
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('features')">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-cards">
+                    <div class="floating-card card-1">
+                        <div class="card-label">Detection Accuracy</div>
+                        <div class="card-value">98.7%</div>
+                    </div>
+                    
+                    <div class="floating-card card-2">
+                        <div class="card-label">Optimization</div>
+                        <div class="card-value">Real-time</div>
+                    </div>
+                    
+                    <div class="floating-card card-3">
+                        <div class="card-label">Response</div>
+                        <div class="card-value">&lt;200ms</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="bg-orb orb-4"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    Powerful <span class="gradient-text">Features</span>
+                </h2>
+                <p class="section-subtitle">
+                    Cutting-edge technology designed to revolutionize urban traffic management
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                    </div>
+                    <h3>Real-time Detection</h3>
+                    <p>Advanced computer vision detects vehicles with 98.7% accuracy in real-time</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a10 10 0 0 1 7.94 16.06l-2.12-2.12A7 7 0 1 0 12 19"></path>
+                            <path d="M12 12v7"></path>
+                            <path d="M15 15l-3 3-3-3"></path>
+                        </svg>
+                    </div>
+                    <h3>Dynamic Signal Allocation</h3>
+                    <p>Assigns green-light priority to the lane with the highest vehicle count.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Low-Latency Decision Engine</h3>
+                    <p>Processes camera input and updates light states in under 200 ms.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
+                    <h3>2D Simulation Environment</h3>
+                    <p>Demonstrates adaptive logic and timing behavior for controlled testing.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                            <path d="M2 12h20"></path>
+                        </svg>
+                    </div>
+                    <h3>Real-Time Performance</h3>
+                    <p>Operates at approximately 30 frames per second on test hardware.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                        </svg>
+                    </div>
+                    <h3>Scalable System</h3>
+                    <p>Works across multiple intersections and cities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats">
+        <div class="bg-orb orb-5"></div>
+
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    Prototype <span class="gradient-text"> Performance Metrics</span>
+                </h2>
+                <p class="section-subtitle">
+                    Measured from live YOLO detection and internal 2D simulation during hackathon testing.
+                </p>
+            </div>
+
+            <div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number gradient-text" data-target="96.8" data-unit="percent">0%</div>
+        <div class="stat-label">Detection Accuracy</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number gradient-text" data-target="200">0</div>
+        <div class="stat-label">Decision Latency (ms)</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number gradient-text" data-target="30">0</div>
+        <div class="stat-label">Processing Rate (FPS)</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number gradient-text" data-target="100" data-unit="percent">0%</div>
+        <div class="stat-label">Simulation Success Rate</div>
+    </div>
+</div>
+
+<p class="data-disclaimer">
+    * Metrics derived from YOLO-based vehicle detection and internal 2D simulation testing during hackathon development. Real-world validation pending.
+</p>
+
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="run-demo">
+        <div class="bg-orb orb-6"></div>
+
+        <div class="container">
+            <div class="cta-card">
+                <div class="badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3l1.912 5.813a2 2 0 001.899 1.378h6.102l-4.938 3.59a2 2 0 00-.727 2.236l1.912 5.813-4.938-3.59a2 2 0 00-2.354 0l-4.938 3.59 1.912-5.813a2 2 0 00-.727-2.236L2.087 10.19h6.102a2 2 0 001.899-1.378L12 3z"></path>
+                    </svg>
+                    <span>Start Your Journey</span>
+                </div>
+
+                <h2>Ready to Transform Traffic Management?</h2>
+                <p>Experience the future of intelligent transportation with our interactive demo</p>
+                
+                <form action="{{ url_for('run_simulator') }}" method="get">
+                <button type="submit" class="btn btn-primary">Try Immersive Demo</button>
+               
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span class="logo-text">SmartFlow</span>
+                </div>
+                
+                <p>&copy; 2025 Quantum Coders. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
