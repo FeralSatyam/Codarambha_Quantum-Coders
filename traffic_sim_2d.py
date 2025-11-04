@@ -281,15 +281,6 @@ def setTime():
     global noOfCars, noOfBikes, noOfBuses, noOfTrucks, noOfRickshaws, noOfLanes
     global carTime, busTime, truckTime, rickshawTime, bikeTime
     os.system("say detecting vehicles, "+directionNumbers[(currentGreen+1)%noOfSignals])
-#    detection_result=detection(currentGreen,tfnet)
-#    greenTime = math.ceil(((noOfCars*carTime) + (noOfRickshaws*rickshawTime) + (noOfBuses*busTime) + (noOfBikes*bikeTime))/(noOfLanes+1))
-#    if(greenTime<defaultMinimum):
-#       greenTime = defaultMinimum
-#    elif(greenTime>defaultMaximum):
-#       greenTime = defaultMaximum
-    # greenTime = len(vehicles[currentGreen][0])+len(vehicles[currentGreen][1])+len(vehicles[currentGreen][2])
-    # noOfVehicles = len(vehicles[directionNumbers[nextGreen]][1])+len(vehicles[directionNumbers[nextGreen]][2])-vehicles[directionNumbers[nextGreen]]['crossed']
-    # print("no. of vehicles = ",noOfVehicles)
     noOfCars, noOfBuses, noOfTrucks, noOfRickshaws, noOfBikes = 0,0,0,0,0
     for j in range(len(vehicles[directionNumbers[nextGreen]][0])):
         vehicle = vehicles[directionNumbers[nextGreen]][0][j]
