@@ -331,6 +331,7 @@ h1, h2, h3 {
 .card-2 {
     top: 25%;
     left: 20px;
+    width: 200px;
     animation: float-slow 8s ease-in-out infinite 1s;
 }
 
