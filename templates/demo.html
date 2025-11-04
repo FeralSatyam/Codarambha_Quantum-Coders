@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFlow Demo - Traffic Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body class="demo-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">SmartFlow</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#stats">Impact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Demo Header -->
+    <section class="demo-header">
+        <h1>Interactive Traffic Management Dashboard</h1>
+        <p>Simulate and control intelligent traffic flow in real-time</p>
+    </section>
+
+    <!-- Main Dashboard -->
+    <div class="demo-container">
+        <!-- Left Panel: Traffic Visualization -->
+        <div class="dashboard-panel left-panel">
+            <h2 class="panel-title">Live Traffic Visualization</h2>
+            <div class="traffic-visualization">
+                <div class="intersection">
+                    <div class="road road-north">
+                        <div class="traffic-flow">
+                            <div class="vehicle"></div>
+                            <div class="vehicle"></div>
+                            <div class="vehicle"></div>
+                        </div>
+                    </div>
+                    <div class="road road-south">
+                        <div class="traffic-flow">
+                            <div class="vehicle"></div>
+                            <div class="vehicle"></div>
+                        </div>
+                    </div>
+                    <div class="road road-east">
+                        <div class="traffic-flow">
+                            <div class="vehicle"></div>
+                            <div class="vehicle"></div>
+                            <div class="vehicle"></div>
+                            <div class="vehicle"></div>
+                        </div>
+                    </div>
+                    <div class="road road-west">
+                        <div class="traffic-flow">
+                            <div class="vehicle"></div>
+                        </div>
+                    </div>
+                    <div class="traffic-light">
+                        <div class="light red active" id="light1"></div>
+                        <div class="light yellow" id="light2"></div>
+                        <div class="light green" id="light3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="control-buttons">
+                <button class="btn btn-control" onclick="startSimulation()">Start Simulation</button>
+                <button class="btn btn-control" onclick="stopSimulation()">Stop</button>
+            </div>
+        </div>
+
+        <!-- Right Panel: Dashboard Metrics -->
+        <div class="dashboard-panel right-panel">
+            <!-- Metrics -->
+            <div class="metrics-section">
+                <h2 class="panel-title">System Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-label">Avg Congestion</div>
+                        <div class="metric-value" id="congestion-metric">72%</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" id="congestion-bar" style="width: 72%"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Traffic Flow</div>
+                        <div class="metric-value" id="flow-metric">45 km/h</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" id="flow-bar" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Wait Time</div>
+                        <div class="metric-value" id="wait-metric">2m 15s</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" id="wait-bar" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Detection Rate</div>
+                        <div class="metric-value" id="detect-metric">98.7%</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill detected" id="detect-bar" style="width: 98.7%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lane Priority -->
+            <div class="priority-section">
+                <h2 class="panel-title">Active Lanes</h2>
+                <div class="lanes">
+                    <div class="lane active">
+                        <span class="lane-name">Lane North</span>
+                        <span class="lane-value" id="lane-north">15 vehicles</span>
+                    </div>
+                    <div class="lane">
+                        <span class="lane-name">Lane South</span>
+                        <span class="lane-value" id="lane-south">8 vehicles</span>
+                    </div>
+                    <div class="lane active">
+                        <span class="lane-name">Lane East</span>
+                        <span class="lane-value" id="lane-east">22 vehicles</span>
+                    </div>
+                    <div class="lane">
+                        <span class="lane-name">Lane West</span>
+                        <span class="lane-value" id="lane-west">5 vehicles</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Launch Program Button -->
+            <div class="program-section">
+                <h2 class="panel-title">System Control</h2>
+                <button class="btn btn-launch" onclick="launchProgram()">
+                    <span class="btn-text">Launch Program</span>
+                    <span class="btn-icon">▶</span>
+                </button>
+                <div class="status-display" id="launch-status"></div>
+            </div>
+
+            <!-- System Status -->
+            <div class="status-section">
+                <h2 class="panel-title">System Status</h2>
+                <div class="status-items">
+                    <div class="status-item">
+                        <span class="status-dot online"></span>
+                        <span>AI Engine</span>
+                        <span class="status-text">Online</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-dot online"></span>
+                        <span>Camera Feed</span>
+                        <span class="status-text">Active</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-dot online"></span>
+                        <span>Signal Control</span>
+                        <span class="status-text">Responsive</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="demo.js"></script>
+</body>
+</html>

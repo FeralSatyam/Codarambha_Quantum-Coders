@@ -2,10 +2,6 @@ import cv2
 import customtkinter as ctk
 from PIL import Image, ImageTk
 import threading
-import matplotlib
-matplotlib.use("Agg")
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from smart_signal.perception.camera import CameraStream
 from smart_signal.perception.detector import YOLODetector
@@ -27,7 +23,7 @@ class TrackerUI(ctk.CTk):
 
         # Layout
         self.grid_columnconfigure(0, weight=0)  # left controls
-        self.grid_columnconfigure(1, weight=1)  # right video+chart
+        self.grid_columnconfigure(1, weight=1)  # right video
         self.grid_rowconfigure(0, weight=1)
 
         # Left panel
@@ -69,26 +65,15 @@ class TrackerUI(ctk.CTk):
                                       hover_color="#aa0000", command=self.quit)
         self.quit_btn.pack(pady=20, padx=10, fill="x")
 
-        # Right panel: split into video (row 0) and chart (row 1)
+        # Right panel: only video feed
         right_panel = ctk.CTkFrame(self)
         right_panel.grid(row=0, column=1, sticky="nsew", padx=10, pady=10)
         right_panel.grid_columnconfigure(0, weight=1)
-        right_panel.grid_rowconfigure(0, weight=3)  # video gets more space
-        right_panel.grid_rowconfigure(1, weight=2)  # chart gets good space too
+        right_panel.grid_rowconfigure(0, weight=1)
 
         # Video feed
         self.video_label = ctk.CTkLabel(right_panel, text="")
         self.video_label.grid(row=0, column=0, sticky="nsew")
-
-        # Chart area
-        fig = Figure(figsize=(6,3), dpi=100)
-        self.ax = fig.add_subplot(111)
-        self.ax.set_title("Cumulative Counts")
-        self.ax.set_ylim(0, 10)
-        self.bar_container = self.ax.bar(CATEGORIES, [0]*len(CATEGORIES), color="skyblue")
-
-        self.canvas = FigureCanvasTkAgg(fig, master=right_panel)
-        self.canvas.get_tk_widget().grid(row=1, column=0, sticky="nsew")
 
         # State
         self.cam = None
@@ -107,7 +92,7 @@ class TrackerUI(ctk.CTk):
             self.status_label.configure(text="Running...")
             self.detector = YOLODetector(model_path="yolov8n.pt", conf_thresh=0.3)
             self.tracker = IOUTracker(iou_thresh=0.3, max_age=10)
-            self.cam = CameraStream(1, fps=30)  # webcam or video path
+            self.cam = CameraStream(0, fps=30)  # webcam or video path
             threading.Thread(target=self.loop, daemon=True).start()
 
     def stop_cam(self):
@@ -122,14 +107,6 @@ class TrackerUI(ctk.CTk):
         self.seen_ids = {cat: set() for cat in CATEGORIES}
         for cat in CATEGORIES:
             self.count_labels[cat].configure(text=f"{cat.capitalize()}: 0")
-        self.update_chart(self.total_counts)
-
-    def update_chart(self, counts):
-        values = [counts.get(cat, 0) for cat in CATEGORIES]
-        for rect, val in zip(self.bar_container, values):
-            rect.set_height(val)
-        self.ax.set_ylim(0, max(10, max(values)+2))
-        self.canvas.draw_idle()
 
     def loop(self):
         for fid, ts, frame in self.cam.frames():
@@ -156,9 +133,6 @@ class TrackerUI(ctk.CTk):
             for cat in CATEGORIES:
                 self.count_labels[cat].configure(text=f"{cat.capitalize()}: {self.total_counts[cat]}")
             self.track_count_label.configure(text=f"Active Tracks: {len(tracks)}")
-
-            # Update chart with cumulative counts
-            self.update_chart(self.total_counts)
 
             # Convert to Tkinter image
             img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

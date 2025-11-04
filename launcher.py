@@ -39,13 +39,13 @@ title = ctk.CTkLabel(
     main_frame,
     text="Smart Traffic Management System",
     font=ctk.CTkFont(size=36, weight="bold"),
-    text_color="#60a5fa"   # bluish accent
+    text_color="#ffffff"   # bluish accent
 )
 title.pack(pady=(30, 10))
 
 subtitle = ctk.CTkLabel(
     main_frame,
-    text="Real-time adaptive traffic control powered by AI.\nReduce congestion, emissions, and travel time.",
+    text="Real-time adaptive traffic control powered by AI.",
     font=ctk.CTkFont(size=16),
     text_color="#93c5fd"   # lighter blue
 )
@@ -63,7 +63,7 @@ for name, path in SCRIPTS.items():
         height=60,
         font=ctk.CTkFont(size=18, weight="bold"),
         corner_radius=12,
-        fg_color="#2563eb",       # primary blue
+        fg_color="#142953",       # primary blue
         hover_color="#1d4ed8",    # darker blue hover
         command=lambda p=path: run_script(p)
     )
