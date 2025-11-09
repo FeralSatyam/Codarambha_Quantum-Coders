@@ -92,7 +92,7 @@ class TrackerUI(ctk.CTk):
             self.status_label.configure(text="Running...")
             self.detector = YOLODetector(model_path="yolov8n.pt", conf_thresh=0.3)
             self.tracker = IOUTracker(iou_thresh=0.3, max_age=10)
-            self.cam = CameraStream(0, fps=30)  # webcam or video path
+            self.cam = CameraStream(1, fps=30)  # webcam or video path
             threading.Thread(target=self.loop, daemon=True).start()
 
     def stop_cam(self):
@@ -129,7 +129,7 @@ class TrackerUI(ctk.CTk):
                 cv2.putText(frame, f"ID {tr.track_id}", (x1, y1 - 5),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 1)
 
-            # Update side panel with cumulative counts
+            # Update side panel with cumulative 
             for cat in CATEGORIES:
                 self.count_labels[cat].configure(text=f"{cat.capitalize()}: {self.total_counts[cat]}")
             self.track_count_label.configure(text=f"Active Tracks: {len(tracks)}")
